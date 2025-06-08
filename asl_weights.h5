@@ -1,0 +1,21 @@
+import tensorflow as tf
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+# Data preparation
+train_datagen = ImageDataGenerator(rescale=1./255, validation_split=0.2)
+train_generator = train_datagen.flow_from_directory(
+    'asl_dataset/',
+    target_size=(224, 224),
+    class_mode='sparse',
+    classes=CLASSES,  # Only A-E
+    subset='training'
+)
+
+# Train the model
+model.fit(
+    train_generator,
+    epochs=3,
+    steps_per_epoch=len(train_generator)
+    
+# Save weights only
+model.save_weights('asl_weights.h5')
